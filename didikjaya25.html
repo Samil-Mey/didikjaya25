@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papan Pemuka Interaktif: Program DIDIK JAYA 2025</title>
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: A single-page dashboard with a sticky top navigation for easy access to key sections. The structure is thematic, designed to tell a compelling story: 1) Hero section introduces the mission. 2) The "Dual-Pronged" approach explains the core strategy. 3) Target groups are clearly defined. 4) A visual 3-phase implementation model clarifies the "how". 5) An interactive budget chart provides financial transparency. 6) The expected impact summarizes the value proposition. This structure is more intuitive for stakeholders than a linear report, allowing them to grasp the program's essence quickly. -->
+    <!-- Visualization & Content Choices:
+        - Dual-Pronged Approach: Side-by-side cards (HTML/CSS). Goal: Compare/Inform. Justification: Visually separates and emphasizes the two core pillars of the program (teachers and students).
+        - Target Groups: Metric cards (HTML/CSS). Goal: Inform. Justification: Presents key numbers (12 teachers, 180 students) in a highly scannable format.
+        - 3-Phase Model: Flow diagram using styled HTML/CSS with flexbox. Goal: Organize/Show Process. Justification: Creates a clear, step-by-step visual narrative without using prohibited SVG/Mermaid.
+        - Budget Breakdown: Doughnut Chart (Chart.js/Canvas). Goal: Compare Composition. Justification: Effectively shows the proportional allocation of the RM39,360 budget, enhancing transparency. Interaction: Hover tooltips with formatted currency.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F0F4F8; }
+        .chart-container { position: relative; height: 350px; max-height: 60vh; width: 100%; max-width: 450px; margin: auto; }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active, .nav-link:hover { color: #005A9C; border-color: #005A9C; }
+        .phase-arrow {
+            content: '→';
+            font-size: 2rem;
+            color: #90A4AE;
+            margin: 0 1rem;
+        }
+        @media (max-width: 767px) {
+            .phase-arrow {
+                content: '↓';
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white/90 backdrop-blur-lg sticky top-0 z-50 shadow-md border-b border-gray-200">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-[#003B6D]">DIDIK JAYA</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#pendekatan" class="nav-link font-semibold text-gray-600 border-b-2 border-transparent pb-1">Pendekatan</a>
+                <a href="#sasaran" class="nav-link font-semibold text-gray-600 border-b-2 border-transparent pb-1">Sasaran</a>
+                <a href="#pelaksanaan" class="nav-link font-semibold text-gray-600 border-b-2 border-transparent pb-1">Pelaksanaan</a>
+                <a href="#belanjawan" class="nav-link font-semibold text-gray-600 border-b-2 border-transparent pb-1">Belanjawan</a>
+                <a href="#impak" class="nav-link font-semibold text-gray-600 border-b-2 border-transparent pb-1">Impak</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+        
+        <section id="hero" class="my-12 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">Program Pemerkasaan Guru & Pelajar Orang Asli</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Satu inisiatif holistik untuk membina keupayaan guru dan meningkatkan prestasi pelajar secara serentak, mewujudkan impak pendidikan yang mampan.</p>
+        </section>
+
+        <section id="pendekatan" class="my-16">
+            <h3 class="text-3xl font-bold text-center text-gray-900 mb-8">Pendekatan Dua Serampang Kami</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-5xl">👩‍🏫</span>
+                        <div>
+                            <h4 class="text-2xl font-bold text-[#005A9C]">Memperkasa Guru</h4>
+                            <p class="text-gray-600 mt-2">Melabur dalam latihan guru dengan kemahiran pedagogi relevan budaya untuk impak jangka panjang yang berterusan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-5xl">🎓</span>
+                        <div>
+                            <h4 class="text-2xl font-bold text-[#005A9C]">Memfokuskan Pelajar</h4>
+                            <p class="text-gray-600 mt-2">Menyediakan bimbingan tuisyen berfokus daripada guru terlatih untuk meningkatkan kefahaman dan keyakinan peperiksaan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sasaran" class="my-16">
+            <h3 class="text-3xl font-bold text-center text-gray-900 mb-8">Kumpulan Sasaran Program</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <p class="text-lg font-semibold text-gray-500">Guru Pembimbing</p>
+                    <p class="text-6xl font-bold text-[#005A9C] my-2">12</p>
+                    <p class="text-gray-600">Guru Bahasa Melayu & Sejarah</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-md">
+                    <p class="text-lg font-semibold text-gray-500">Pelajar SPM</p>
+                    <p class="text-6xl font-bold text-[#005A9C] my-2">180</p>
+                    <p class="text-gray-600">Dari 3 buah sekolah fokus</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pelaksanaan" class="my-16">
+             <h3 class="text-3xl font-bold text-center text-gray-900 mb-10">Model Pelaksanaan 3 Fasa</h3>
+             <div class="flex flex-col md:flex-row items-center justify-center text-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg w-full md:w-1/4">
+                    <p class="text-2xl font-bold text-[#003B6D]">1️⃣</p>
+                    <h4 class="text-xl font-bold mt-2">Latihan Guru (ToT)</h4>
+                    <p class="text-gray-600 text-sm mt-1">Bengkel intensif 2 hari untuk 12 guru terpilih.</p>
+                </div>
+                <div class="phase-arrow"></div>
+                <div class="bg-white p-6 rounded-xl shadow-lg w-full md:w-1/4">
+                    <p class="text-2xl font-bold text-[#003B6D]">2️⃣</p>
+                    <h4 class="text-xl font-bold mt-2">Kelas Bimbingan</h4>
+                    <p class="text-gray-600 text-sm mt-1">16 sesi tuisyen oleh guru terlatih (nisbah 1:15).</p>
+                </div>
+                <div class="phase-arrow"></div>
+                <div class="bg-white p-6 rounded-xl shadow-lg w-full md:w-1/4">
+                    <p class="text-2xl font-bold text-[#003B6D]">3️⃣</p>
+                    <h4 class="text-xl font-bold mt-2">Pemantauan & Penilaian</h4>
+                    <p class="text-gray-600 text-sm mt-1">Analisis impak melalui PLC, tinjauan & keputusan peperiksaan.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="belanjawan" class="my-16">
+            <h3 class="text-3xl font-bold text-center text-gray-900 mb-2">Pelaburan & Belanjawan</h3>
+            <p class="mt-2 text-center text-gray-600">Peruntukan keseluruhan sebanyak <strong class="text-[#005A9C]">RM39,360</strong> untuk impak yang menyeluruh.</p>
+            <div class="mt-8 bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
+                <div class="chart-container">
+                    <canvas id="budgetChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="impak" class="my-16 text-center bg-[#003B6D] text-white p-12 rounded-2xl">
+            <div class="text-5xl mb-4">🎯</div>
+            <h3 class="text-3xl font-bold">Hasil & Impak Jangka Panjang</h3>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-blue-100">Mewujudkan guru yang lebih berupaya dan pelajar yang lebih yakin, membawa kepada peningkatan berterusan dalam peratusan Layak Sijil SPM dan membuka lebih banyak peluang untuk komuniti.</p>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="font-semibold">Satu Inisiatif Strategik oleh ORACO & JPN Pahang</p>
+            <p class="text-sm text-gray-400 mt-2">&copy; 2025 Program DIDIK JAYA</p>
+        </div>
+    </footer>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const budgetCtx = document.getElementById('budgetChart').getContext('2d');
+        new Chart(budgetCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Elaun Khas Guru', 'Makan & Minum Pelajar', 'Latihan Guru (Bahan & Penceramah)', 'Pengurusan Sekolah'],
+                datasets: [{
+                    label: 'Pecahan Belanjawan',
+                    data: [11520, 23040, 3900, 900],
+                    backgroundColor: ['#005A9C', '#007BFF', '#5DA9E9', '#A8D5FF'],
+                    borderColor: '#F0F4F8',
+                    borderWidth: 4,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { padding: 20, font: { size: 14 } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) { return label.join(' '); }
+                                return label;
+                            },
+                            label: function(context) {
+                                const value = context.parsed;
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1) + '%';
+                                return `RM ${value.toLocaleString()} (${percentage})`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('main section[id]');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { rootMargin: '-50% 0px -50% 0px' });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+    </script>
+</body>
+</html>
